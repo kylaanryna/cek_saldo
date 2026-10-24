@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             flash('error', 'Pilih password yang berbeda dari bawaan.');
         } else {
             $db->prepare('UPDATE users SET password_hash = ? WHERE id = ?')->execute([password_hash($baru, PASSWORD_DEFAULT), $me['id']]);
+            remember_hapus_semua('staff', $me['id']);   // perangkat lain harus login ulang
             log_act('Ganti password sendiri');
             flash('success', 'Password berhasil diganti (berlaku juga di web peminjaman).');
         }

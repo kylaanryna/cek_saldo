@@ -16,6 +16,9 @@ function wali_masuk(array $w)
     session_regenerate_id(true);
     $_SESSION['wali'] = ['id' => (int)$w['id'], 'username' => $w['username'], 'nama' => $w['nama']];
     db()->prepare('UPDATE saldo_wali SET gagal = 0, probe_gagal = 0, probe_mulai = NULL, terkunci_sampai = NULL, last_login = ? WHERE id = ?')->execute([now(), $w['id']]);
+    if (!empty($_POST['ingat'])) {
+        remember_set('wali', $w['id']);
+    }
     log_act('Login wali');
 }
 
@@ -135,6 +138,7 @@ $flash = take_flash();
       </div>
       <span class="hint">Masuk otomatis begitu PIN benar. Belum punya PIN? Santri membuatnya di layar Tarik Saldo, atau minta admin.</span>
     </div>
+    <label style="display:flex;gap:8px;align-items:center;font-weight:600;font-size:14px;cursor:pointer;margin-top:-4px"><input type="checkbox" name="ingat" value="1" style="width:18px;height:18px;accent-color:#7c3aed"> Ingat saya <span class="muted" style="font-weight:400">(tetap masuk di perangkat ini)</span></label>
     <small data-autostatus class="muted" style="display:block;min-height:18px;margin-top:-6px" aria-live="polite"></small>
     <button class="btn btn-solid btn-block" type="submit">Masuk</button>
     <p class="muted" style="margin:0;text-align:center;font-size:14px">Petugas sekolah? <a href="login.php"><b>Masuk di sini</b></a></p>

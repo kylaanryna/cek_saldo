@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->prepare('DELETE FROM saldo_wali_santri WHERE wali_id = ?')->execute([$wid]);
         $db->prepare('DELETE FROM saldo_wali WHERE id = ?')->execute([$wid]);
         $db->commit();
+        remember_hapus_semua('wali', $wid);
         log_act('Hapus akun wali ' . $w['nama'] . ' (' . $w['username'] . ')');
         flash('success', 'Akun wali dihapus.');
     }

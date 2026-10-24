@@ -741,3 +741,9 @@ function wali_riwayat_filter(array $ids, $anakId, $tipe, $dari, $sampai)
     }
     return ['WHERE ' . implode(' AND ', $w), $p];
 }
+
+/* ---------- "Ingat saya" (tetap masuk setelah browser ditutup) ---------- */
+define('REM_TABLE', 'saldo_remember');
+define('REM_COOKIE', 'SALDOREM');
+require __DIR__ . '/includes/remember.php';
+remember_autologin();

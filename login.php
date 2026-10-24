@@ -29,6 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_regenerate_id(true);
             $_SESSION['user'] = ['id' => (int)$row['id'], 'username' => $row['username'], 'nama' => $row['nama'], 'role' => $row['role']];
             unset($_SESSION['fails'], $_SESSION['lock_until'], $_SESSION['probe']);
+            if (!empty($_POST['ingat'])) {
+                remember_set('staff', $row['id']);
+            }
             log_act('Login');
             echo json_encode(['ok' => true, 'to' => 'dashboard.php']);
             exit;
@@ -53,6 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_regenerate_id(true);
             $_SESSION['user'] = ['id' => (int)$row['id'], 'username' => $row['username'], 'nama' => $row['nama'], 'role' => $row['role']];
             unset($_SESSION['fails'], $_SESSION['lock_until']);
+            if (!empty($_POST['ingat'])) {
+                remember_set('staff', $row['id']);
+            }
             log_act('Login');
             redirect('dashboard.php');
         }
@@ -89,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div>
       <h1>Masuk</h1>
-      <p class="muted" style="margin:4px 0 0">Web cek saldo Santri Sekolah Impian</p>
+      <p class="muted" style="margin:4px 0 0">Gunakan akun yang sama dengan web peminjaman device</p>
     </div>
     <?php if ($error): ?><div class="alert" role="alert"><?= e($error) ?></div><?php endif; ?>
     <div class="field">
@@ -103,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="button" id="togglePw" aria-label="Tampilkan password"><?= icon('eye', 20) ?></button>
       </div>
     </div>
+    <label style="display:flex;gap:8px;align-items:center;font-weight:600;font-size:14px;cursor:pointer;margin-top:-4px"><input type="checkbox" name="ingat" value="1" style="width:18px;height:18px;accent-color:#7c3aed"> Ingat saya <span class="muted" style="font-weight:400">(tetap masuk di perangkat ini)</span></label>
     <small data-autostatus class="muted" style="display:block;min-height:18px;margin-top:-6px" aria-live="polite"></small>
     <button class="btn btn-solid btn-block" type="submit">Masuk</button>
     <p class="muted" style="margin:0;text-align:center;font-size:14px">Wali santri? <a href="wali_login.php"><b>Masuk di sini</b></a></p>
