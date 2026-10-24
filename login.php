@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div>
       <h1>Masuk</h1>
-      <p class="muted" style="margin:4px 0 0">Gunakan akun yang sama dengan web peminjaman device</p>
+      <p class="muted" style="margin:4px 0 0">Web cek saldo Santri Sekolah Impian</p>
     </div>
     <?php if ($error): ?><div class="alert" role="alert"><?= e($error) ?></div><?php endif; ?>
     <div class="field">
