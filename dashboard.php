@@ -57,9 +57,7 @@ $active = 'dashboard';
 $refresh = 60;
 include __DIR__ . '/includes/header.php';
 ?>
-<?php if ($defaultPw): ?>
-  <div class="alert">Password admin masih bawaan (admin123). Segera ganti di menu <a href="pengaturan.php#akun"><b>Pengaturan</b></a> (berlaku juga untuk web peminjaman).</div>
-<?php endif; ?>
+
  
 <div class="bento">
   <section class="card hero s12">

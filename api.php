@@ -232,7 +232,7 @@ try {
                 if ($jumlah > $sisa) {
                     throw new RuntimeException('Melebihi batas tarik harian. Sisa hari ini ' . rupiah(max(0, $sisa)) . '.');
                 }
-                $saldoBaru = saldo_apply($db, $akun, 'tarik', $jumlah, 'Tarik tunai di kiosk', $user['nama']);
+                $saldoBaru = saldo_apply($db, $akun, 'tarik', $jumlah, 'Tarik tunai ', $user['nama']);
                 $db->commit();
             } catch (Throwable $ex) {
                 if ($db->inTransaction()) {
